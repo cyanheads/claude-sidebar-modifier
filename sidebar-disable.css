@@ -1,41 +1,80 @@
-/* Hide all sidebar elements except Claude title when not pinned */
-nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"]) > *:not(:first-child) {
-    display: none !important;
+/* Adjust sidebar */
+nav.z-20.h-screen {
+  transition: width 0.3s ease !important;
+  overflow-x: hidden !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
+
+nav.z-20.h-screen > div {
+  transition: width 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* Collapsed sidebar styles */
+nav.z-20.h-screen.collapsed > div:not(:first-child) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+nav.z-20.h-screen.collapsed > div:first-child {
+  width: 4.5rem !important;
+  min-width: 4.5rem !important;
+  max-width: 4.5rem !important;
+}
+
+/* Ensure Claude title remains visible and clickable */
+nav.z-20.h-screen > div:first-child > div > div {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+/* Adjust main content */
+div.flex.min-h-screen.w-full > div:not(.z-20) {
+  transition: margin-left 0.3s ease, width 0.3s ease !important;
+}
+
+/* Custom scrollbar for sidebar */
+nav.z-20.h-screen {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+nav.z-20.h-screen::-webkit-scrollbar {
+  width: 6px;
+}
+
+nav.z-20.h-screen::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 3px;
+}
+
+nav.z-20.h-screen::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide hover effects */
+.from-bg-300\/70,
+.to-bg-400\/70,
+.from-bg-500\/40,
+.to-bg-500\/0 {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure no hover effects near the left edge */
+body::before {
+  content: none !important;
+}
+
+/* Adjust sidebar elements for narrow width */
+@media (max-width: 768px) {
+  nav.z-20.h-screen,
+  nav.z-20.h-screen > div {
+    width: var(--sidebar-width, 4.5rem) !important;
+    min-width: var(--sidebar-width, 4.5rem) !important;
+    max-width: var(--sidebar-width, 4.5rem) !important;
   }
-  
-  /* Ensure Claude title remains visible and clickable */
-  nav[data-testid="menu-sidebar"] > div:first-child > div > div {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    display: block !important;
-  }
-  
-  /* Disable hover effects */
-  .from-bg-300\/70,
-  .to-bg-400\/70,
-  .from-bg-500\/40,
-  .to-bg-500\/0 {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  
-  /* Remove transitions */
-  nav[data-testid="menu-sidebar"] * {
-    transition: none !important;
-  }
-  
-  /* Ensure no hover effects near the left edge */
-  body::before {
-    content: none !important;
-  }
-  
-  /* Adjust main content when sidebar is not pinned */
-  body:has(nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"])) > div[class*="flex"] > div[class*="flex"]:not([class*="min-h-screen"]) {
-    margin-left: auto !important;
-    width: calc(100% - 4.5rem) !important; /* Adjust based on the Claude title width */
-  }
-  
-  /* Hide sidebar content when not pinned */
-  nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"]) > div:not(:first-child) {
-    display: none !important;
-  }
+}

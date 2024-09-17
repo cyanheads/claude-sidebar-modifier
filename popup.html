@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sidebar Adjuster</title>
+  <style>
+    body {
+      width: 250px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    .slider-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    #widthSlider {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    #widthValue {
+      min-width: 30px;
+    }
+    button {
+      width: 100%;
+      padding: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Sidebar Width</h2>
+  <div class="slider-container">
+    <input type="range" id="widthSlider" min="4.5" max="30" step="0.5" value="18">
+    <span id="widthValue">18</span>rem
+  </div>
+  <button id="pinButton">Pin Sidebar</button>
+  <script src="popup.js"></script>
+</body>
+</html>
