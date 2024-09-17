@@ -6,10 +6,9 @@ This Firefox extension allows you to adjust the sidebar width on Claude.ai, prov
 
 ## ✨ Features
 
-- � Adjust sidebar width using a slider
+- ➡️ Adjust sidebar width using a slider
 - 📌 Pin or unpin the sidebar
 - 🚫 Completely remove the sidebar
-- 🚀 Lightweight and efficient
 - 🔒 Can only access https://claude.ai/
 
 ## 🛠️ Installation
