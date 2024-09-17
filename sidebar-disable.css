@@ -1,0 +1,41 @@
+/* Hide all sidebar elements except Claude title when not pinned */
+nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"]) > *:not(:first-child) {
+    display: none !important;
+  }
+  
+  /* Ensure Claude title remains visible and clickable */
+  nav[data-testid="menu-sidebar"] > div:first-child > div > div {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: block !important;
+  }
+  
+  /* Disable hover effects */
+  .from-bg-300\/70,
+  .to-bg-400\/70,
+  .from-bg-500\/40,
+  .to-bg-500\/0 {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  /* Remove transitions */
+  nav[data-testid="menu-sidebar"] * {
+    transition: none !important;
+  }
+  
+  /* Ensure no hover effects near the left edge */
+  body::before {
+    content: none !important;
+  }
+  
+  /* Adjust main content when sidebar is not pinned */
+  body:has(nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"])) > div[class*="flex"] > div[class*="flex"]:not([class*="min-h-screen"]) {
+    margin-left: auto !important;
+    width: calc(100% - 4.5rem) !important; /* Adjust based on the Claude title width */
+  }
+  
+  /* Hide sidebar content when not pinned */
+  nav[data-testid="menu-sidebar"]:not([style*="width: 18rem"]) > div:not(:first-child) {
+    display: none !important;
+  }

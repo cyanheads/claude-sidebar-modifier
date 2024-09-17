@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "Claude Sidebar Disabler",
+    "version": "1.0",
+    "description": "Disables the Claude.ai sidebar functionality",
+    "icons": {
+      "48": "icon-48.png",
+      "96": "icon-96.png"
+    },
+    "permissions": [
+      "https://*.claude.ai/*",
+      "storage"
+    ],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*.claude.ai/*"],
+        "js": ["sidebar-disable.js"],
+        "css": ["sidebar-disable.css"],
+        "run_at": "document_start"
+      }
+    ]
+  }
