@@ -1,3 +1,7 @@
+// File: popup.js
+// This file contains the JavaScript code for the extension's popup interface.
+// It interacts with the UI elements and handles user interactions.
+
 document.addEventListener('DOMContentLoaded', function() {
   const slider = document.getElementById('widthSlider');
   const widthValue = document.getElementById('widthValue');

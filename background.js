@@ -1,3 +1,7 @@
+// File: background.js
+// This file contains the background script for the Claude Sidebar Disable extension.
+// It manages settings, listens for changes, and communicates with the content script.
+
 let currentSettings = {
   sidebarWidth: 18,
   isPinned: false
