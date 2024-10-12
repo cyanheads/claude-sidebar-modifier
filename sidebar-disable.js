@@ -13,18 +13,24 @@
             return;
         }
 
+        // Find the Claude title element
+        const claudeTitle = sidebar.querySelector('h1, h2, h3, h4, h5, h6');
+        if (!claudeTitle) {
+            console.error('Claude title not found');
+            return;
+        }
+
         // Create settings icon
-        const settingsIcon = document.createElement('div');
+        const settingsIcon = document.createElement('span');
         settingsIcon.innerHTML = '⚙️';
+        settingsIcon.id = 'claudeSidebarSettingsIcon';
         settingsIcon.style.cssText = `
-            position: absolute;
-            top: 10px;
-            right: 10px;
             font-size: 20px;
             cursor: pointer;
-            z-index: 1000;
+            margin-left: 10px;
+            vertical-align: middle;
         `;
-        sidebar.appendChild(settingsIcon);
+        claudeTitle.appendChild(settingsIcon);
 
         // Create settings panel
         settingsPanel = document.createElement('div');
@@ -40,7 +46,8 @@
         sidebar.appendChild(settingsPanel);
 
         // Toggle settings panel
-        settingsIcon.addEventListener('click', () => {
+        settingsIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
             settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
         });
 
