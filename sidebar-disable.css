@@ -1,60 +1,32 @@
-#custom-sidebar {
-  transition: width 0.3s ease !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  bottom: 0 !important;
-  z-index: 20 !important;
+/* sidebar-disable.css */
+.fixed.bottom-0.left-0.top-0.z-20 {
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
+  overflow-x: hidden;
 }
 
-#sidebar-resizer {
-  position: absolute;
-  top: 0;
-  right: -5px;
-  width: 10px;
-  height: 100%;
-  background-color: transparent;
-  cursor: col-resize;
-  z-index: 30;
-}
-
-#sidebar-resizer:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-/* Adjust main content */
-div.flex.min-h-screen.w-full > div:not(.z-20) {
-  transition: margin-left 0.3s ease, width 0.3s ease !important;
-}
-
-/* Ensure content within sidebar adjusts properly */
-#custom-sidebar > div {
+/* Ensure our modifications don't interfere with existing styles */
+.fixed.bottom-0.left-0.top-0.z-20 > div {
   width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
 }
 
-/* Preserve sidebar background and scrolling */
-#custom-sidebar {
-  background-color: inherit !important;
-  overflow-y: auto !important;
+/* Styles for the settings panel */
+#sidebarWidthSlider {
+  width: 100%;
 }
 
-/* Custom scrollbar for sidebar */
-#custom-sidebar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+#sidebarWidthValue {
+  display: inline-block;
+  width: 50px;
+  text-align: right;
 }
 
-#custom-sidebar::-webkit-scrollbar {
-  width: 6px;
+/* Ensure the sidebar is visible when hovered or pinned */
+.fixed.bottom-0.left-0.top-0.z-20:hover,
+.fixed.bottom-0.left-0.top-0.z-20.pinned {
+  transform: translateX(0) !important;
 }
 
-#custom-sidebar::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.5);
-  border-radius: 3px;
-}
-
-#custom-sidebar::-webkit-scrollbar-track {
-  background: transparent;
+/* Add a small visible edge when the sidebar is hidden */
+.fixed.bottom-0.left-0.top-0.z-20:not(.pinned) {
+  transform: translateX(calc(-100% + 5px));
 }

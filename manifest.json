@@ -2,33 +2,26 @@
   "manifest_version": 2,
   "name": "Claude Sidebar Adjuster",
   "version": "1.2",
-  "description": "Adjust the Claude.ai sidebar width and replace with a custom sidebar",
-  "icons": {
-    "48": "icon-48.png",
-    "96": "icon-96.png"
-  },
+  "description": "Adjust the Claude.ai sidebar width and behavior",
   "permissions": [
-    "https://*.claude.ai/*",
+    "activeTab",
     "storage",
-    "tabs"
+    "https://*.claude.ai/*"
   ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": true
-  },
   "content_scripts": [
     {
       "matches": ["https://*.claude.ai/*"],
       "js": ["sidebar-disable.js"],
       "css": ["sidebar-disable.css"],
-      "run_at": "document_start"
+      "run_at": "document_idle"
     }
   ],
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "48": "icon-48.png",
-      "96": "icon-96.png"
-    }
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "48": "icon-48.png",
+    "96": "icon-96.png"
   }
 }
