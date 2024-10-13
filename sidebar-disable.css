@@ -64,6 +64,24 @@
   text-align: right;
 }
 
+/* Styles for the save button */
+#saveSettingsButton {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#saveSettingsButton:hover {
+  background-color: #45a049;
+}
+
 /* Ensure the sidebar is visible when hovered or pinned */
 .fixed.bottom-0.left-0.top-0.z-20:hover,
 .fixed.bottom-0.left-0.top-0.z-20.pinned {

@@ -6,22 +6,28 @@
   "permissions": [
     "activeTab",
     "storage",
-    "https://*.claude.ai/*"
+    "https://*.claude.ai/*",
+    "tabs"
   ],
   "content_scripts": [
     {
       "matches": ["https://*.claude.ai/*"],
       "js": ["sidebar-disable.js"],
       "css": ["sidebar-disable.css"],
-      "run_at": "document_idle"
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   },
   "icons": {
     "48": "icon-48.png",
     "96": "icon-96.png"
-  }
+  },
+  "web_accessible_resources": [
+    "sidebar-disable.js",
+    "sidebar-disable.css"
+  ]
 }

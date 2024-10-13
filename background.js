@@ -1,55 +1,73 @@
 // background.js
 let currentSettings = {
-  sidebarWidth: 288,
-  isPinned: false
+  sidebarWidth: 288
 };
 
-// Load settings from storage
 function loadSettings() {
-  chrome.storage.local.get(['sidebarWidth', 'isPinned'], function(data) {
-    if (data.sidebarWidth) currentSettings.sidebarWidth = data.sidebarWidth;
-    if (data.isPinned !== undefined) currentSettings.isPinned = data.isPinned;
-    console.log('Loaded settings:', currentSettings);
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['sidebarWidth'], function(data) {
+      if (data.sidebarWidth) currentSettings.sidebarWidth = data.sidebarWidth;
+      console.log('Loaded settings:', currentSettings);
+      resolve(currentSettings);
+    });
   });
 }
 
-// Save settings to storage
 function saveSettings() {
-  chrome.storage.local.set(currentSettings, function() {
-    console.log('Settings saved:', currentSettings);
+  return new Promise((resolve) => {
+    chrome.storage.local.set(currentSettings, function() {
+      console.log('Settings saved:', currentSettings);
+      resolve(currentSettings);
+    });
   });
 }
 
-// Initialize settings
-loadSettings();
+function injectContentScript(tabId) {
+  chrome.tabs.executeScript(tabId, { file: 'sidebar-disable.js' }, function() {
+    if (chrome.runtime.lastError) {
+      console.error('Error injecting content script:', chrome.runtime.lastError);
+    } else {
+      console.log('Content script injected successfully');
+      applySettingsToTab(tabId);
+    }
+  });
+}
 
-// Listen for changes in storage
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-  if (namespace === 'local') {
-    if (changes.sidebarWidth) currentSettings.sidebarWidth = changes.sidebarWidth.newValue;
-    if (changes.isPinned !== undefined) currentSettings.isPinned = changes.isPinned.newValue;
-    console.log('Settings updated:', currentSettings);
-  }
-});
+function applySettingsToTab(tabId) {
+  chrome.tabs.sendMessage(tabId, {
+    action: "updateSidebar",
+    settings: currentSettings
+  }, function(response) {
+    if (chrome.runtime.lastError) {
+      console.log("Error sending message to tab:", chrome.runtime.lastError);
+      // If there's an error, try injecting the content script again
+      injectContentScript(tabId);
+    } else {
+      console.log("Settings applied to tab:", response);
+    }
+  });
+}
 
-// Apply settings when a Claude.ai page is loaded or refreshed
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url && tab.url.includes('claude.ai')) {
-    chrome.tabs.sendMessage(tabId, {
-      action: "updateSidebar",
-      settings: currentSettings
-    });
+    injectContentScript(tabId);
   }
 });
 
-// Listen for messages from content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getSettings") {
-    sendResponse(currentSettings);
+    loadSettings().then(settings => sendResponse(settings));
+    return true;
   } else if (request.action === "saveSettings") {
     currentSettings = {...currentSettings, ...request.settings};
-    saveSettings();
-    sendResponse({success: true});
+    saveSettings().then(() => {
+      chrome.tabs.query({url: "*://*.claude.ai/*"}, function(tabs) {
+        tabs.forEach(tab => applySettingsToTab(tab.id));
+      });
+      sendResponse({success: true});
+    });
+    return true;
   }
-  return true; // Keeps the message channel open for asynchronous responses
 });
+
+loadSettings();
