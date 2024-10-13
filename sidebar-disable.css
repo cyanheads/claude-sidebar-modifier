@@ -88,7 +88,12 @@
   transform: translateX(0) !important;
 }
 
-/* Add a small visible edge when the sidebar is hidden */
+/* Increase the visible edge when the sidebar is hidden */
 .fixed.bottom-0.left-0.top-0.z-20:not(.pinned) {
-  transform: translateX(calc(-100% + 5px));
+  transform: translateX(calc(-100% + 40px));
+}
+
+/* Add hover effect for easier access */
+.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):hover {
+  transform: translateX(calc(-100% + 80px));
 }
