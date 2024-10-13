@@ -1,12 +1,16 @@
 // background.js
 let currentSettings = {
-  sidebarWidth: 288
+  sidebarWidth: 288,
+  sidebarPinned: false,
+  sidebarDisabled: false
 };
 
 function loadSettings() {
   return new Promise((resolve) => {
-    chrome.storage.local.get(['sidebarWidth'], function(data) {
+    chrome.storage.local.get(['sidebarWidth', 'sidebarPinned', 'sidebarDisabled'], function(data) {
       if (data.sidebarWidth) currentSettings.sidebarWidth = data.sidebarWidth;
+      if (data.sidebarPinned !== undefined) currentSettings.sidebarPinned = data.sidebarPinned;
+      if (data.sidebarDisabled !== undefined) currentSettings.sidebarDisabled = data.sidebarDisabled;
       console.log('Loaded settings:', currentSettings);
       resolve(currentSettings);
     });

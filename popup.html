@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Claude Sidebar Modifier</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .setting-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Claude Sidebar Modifier</h2>
+    <div class="setting-group">
+        <label for="sidebarWidth">Sidebar Width: <span id="widthValue"></span>px</label>
+        <input type="range" id="sidebarWidth" min="100" max="500" value="288">
+    </div>
+    <div class="setting-group">
+        <label>
+            <input type="checkbox" id="sidebarPinned"> Pin Sidebar
+        </label>
+    </div>
+    <div class="setting-group">
+        <label>
+            <input type="checkbox" id="sidebarDisabled"> Disable Sidebar
+        </label>
+    </div>
+    <button id="saveSettings">Save Settings</button>
+    <script src="popup.js"></script>
+</body>
+</html>

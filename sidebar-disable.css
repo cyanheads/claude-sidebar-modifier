@@ -89,11 +89,26 @@
 }
 
 /* Increase the visible edge when the sidebar is hidden */
-.fixed.bottom-0.left-0.top-0.z-20:not(.pinned) {
+.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):not(.disabled) {
   transform: translateX(calc(-100% + 40px));
 }
 
 /* Add hover effect for easier access */
-.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):hover {
+.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):not(.disabled):hover {
   transform: translateX(calc(-100% + 80px));
+}
+
+/* Styles for the activation zone */
+.sidebar-activation-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  z-index: 1001;
+  background-color: transparent;
+}
+
+.sidebar-activation-zone:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }

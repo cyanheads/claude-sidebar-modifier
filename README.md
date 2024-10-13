@@ -1,14 +1,14 @@
-# 🤖 Claude.ai Sidebar Adjuster
+# 🤖 Claude.ai Sidebar Modifier
 
 ## 🎯 Description
 
-This Firefox extension allows you to adjust the sidebar width on Claude.ai, providing a customizable and more focused browsing experience. You can also completely disable the sidebar from popping up. Useful for users who want to optimize their screen real estate or prefer a specific sidebar width.
+This Firefox extension allows you to modify the sidebar behavior on Claude.ai, providing a customizable and more focused browsing experience. You can adjust the sidebar width, pin/unpin it, or completely disable it from popping up. Useful for users who want to optimize their screen real estate or prefer a specific sidebar configuration.
 
 ## ✨ Features
 
 - ➡️ Adjust sidebar width using a slider
 - 📌 Pin or unpin the sidebar
-- 🚫 Completely remove the sidebar
+- 🚫 Completely disable the sidebar
 - 🔒 Can only access https://claude.ai/
 
 ## 🛠️ Installation
@@ -21,7 +21,7 @@ This Firefox extension allows you to adjust the sidebar width on Claude.ai, prov
 ## 📁 Project Structure
 
 ```
-claude-sidebar-adjuster/
+claude-sidebar-mod/
 ├── manifest.json
 ├── sidebar-disable.js
 ├── background.js
@@ -37,8 +37,9 @@ claude-sidebar-adjuster/
 1. Visit a Claude.ai page.
 2. Click on the extension icon in the Firefox toolbar to open the popup.
 3. Use the slider to adjust the sidebar width.
-4. Click the "Pin Sidebar" or "Unpin Sidebar" button to toggle the sidebar's pinned state.
-5. Your settings will be automatically applied and saved.
+4. Toggle the "Pin Sidebar" checkbox to change the sidebar's pinned state.
+5. Toggle the "Disable Sidebar" checkbox to enable or disable the sidebar.
+6. Your settings will be automatically applied and saved.
 
 ## 👨‍💻 Development
 
