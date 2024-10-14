@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Claude Sidebar Modifier",
   "version": "1.4",
-  "description": "Modify the Claude.ai sidebar width, pin, and disable behavior",
+  "description": "Modify the Claude.ai sidebar width and disable behavior",
   "permissions": [
     "activeTab",
     "storage",
@@ -14,8 +14,7 @@
       "matches": ["https://*.claude.ai/*"],
       "js": ["sidebar-disable.js"],
       "css": ["sidebar-disable.css"],
-      "run_at": "document_start",
-      "all_frames": true
+      "run_at": "document_start"
     }
   ],
   "background": {

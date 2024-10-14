@@ -1,8 +1,6 @@
-// popup.js
 document.addEventListener('DOMContentLoaded', function() {
     const widthSlider = document.getElementById('sidebarWidth');
     const widthValue = document.getElementById('widthValue');
-    const pinnedCheckbox = document.getElementById('sidebarPinned');
     const disabledCheckbox = document.getElementById('sidebarDisabled');
     const saveButton = document.getElementById('saveSettings');
 
@@ -11,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (response) {
             widthSlider.value = response.sidebarWidth;
             widthValue.textContent = response.sidebarWidth;
-            pinnedCheckbox.checked = response.sidebarPinned;
             disabledCheckbox.checked = response.sidebarDisabled;
         }
     });
@@ -25,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     saveButton.addEventListener('click', function() {
         const settings = {
             sidebarWidth: parseInt(widthSlider.value),
-            sidebarPinned: pinnedCheckbox.checked,
             sidebarDisabled: disabledCheckbox.checked
         };
 

@@ -1,7 +1,5 @@
-// sidebar-disable.js
 (function() {
     let sidebarWidth = 288;
-    let sidebarPinned = false;
     let sidebarDisabled = false;
     let sidebar;
     let settingsPanel;
@@ -76,8 +74,10 @@
                 vertical-align: middle;
             `;
             titleElement.appendChild(settingsIcon);
-            settingsIcon.addEventListener('click', toggleSettingsPanel);
         }
+        // Always attach the event listener, even if the icon already exists
+        settingsIcon.removeEventListener('click', toggleSettingsPanel);
+        settingsIcon.addEventListener('click', toggleSettingsPanel);
         return settingsIcon;
     }
 
@@ -111,12 +111,6 @@
                     <span id="sidebarWidthValue">${sidebarWidth}px</span>
                 </div>
                 <div class="setting-group">
-                    <label for="sidebarPinnedToggle">
-                        <input type="checkbox" id="sidebarPinnedToggle" ${sidebarPinned ? 'checked' : ''}>
-                        Pin Sidebar
-                    </label>
-                </div>
-                <div class="setting-group">
                     <label for="sidebarDisabledToggle">
                         <input type="checkbox" id="sidebarDisabledToggle" ${sidebarDisabled ? 'checked' : ''}>
                         Disable Sidebar
@@ -131,12 +125,6 @@
             widthSlider.addEventListener('input', () => {
                 sidebarWidth = parseInt(widthSlider.value);
                 widthValue.textContent = `${sidebarWidth}px`;
-                applySidebarSettings();
-            });
-
-            const pinnedToggle = document.getElementById('sidebarPinnedToggle');
-            pinnedToggle.addEventListener('change', () => {
-                sidebarPinned = pinnedToggle.checked;
                 applySidebarSettings();
             });
 
@@ -164,11 +152,9 @@
                 sidebar.style.transform = 'translateX(-100%)';
                 createActivationZone();
             } else {
-                sidebar.style.transform = sidebarPinned ? 'translateX(0)' : 'translateX(calc(-100% + 40px))';
+                sidebar.style.transform = 'translateX(0)';
                 removeActivationZone();
             }
-
-            sidebar.classList.toggle('pinned', sidebarPinned);
         }
     }
 
@@ -202,30 +188,47 @@
 
     function saveSettings() {
         localStorage.setItem('claudeSidebarWidth', sidebarWidth);
-        localStorage.setItem('claudeSidebarPinned', sidebarPinned);
         localStorage.setItem('claudeSidebarDisabled', sidebarDisabled);
         chrome.runtime.sendMessage({
             action: "saveSettings",
-            settings: { sidebarWidth, sidebarPinned, sidebarDisabled }
+            settings: { sidebarWidth, sidebarDisabled }
         });
     }
 
     function loadSettings() {
         const savedWidth = localStorage.getItem('claudeSidebarWidth');
-        const savedPinned = localStorage.getItem('claudeSidebarPinned');
         const savedDisabled = localStorage.getItem('claudeSidebarDisabled');
         
         if (savedWidth) sidebarWidth = parseInt(savedWidth);
-        if (savedPinned !== null) sidebarPinned = savedPinned === 'true';
         if (savedDisabled !== null) sidebarDisabled = savedDisabled === 'true';
 
         chrome.runtime.sendMessage({ action: "getSettings" }, function(response) {
             if (response) {
                 if (response.sidebarWidth) sidebarWidth = response.sidebarWidth;
-                if (response.sidebarPinned !== undefined) sidebarPinned = response.sidebarPinned;
                 if (response.sidebarDisabled !== undefined) sidebarDisabled = response.sidebarDisabled;
                 applySidebarSettings();
             }
+        });
+    }
+
+    function observeSidebar() {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                    const sidebar = findSidebar();
+                    if (sidebar) {
+                        const title = findSidebarTitle(sidebar);
+                        if (title) {
+                            createSettingsIcon(title);
+                        }
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
         });
     }
 
@@ -233,32 +236,11 @@
         applyStyles();
         loadSettings();
         debouncedModifySidebar();
+        observeSidebar();
     }
 
     // Run initialization immediately
     init();
-
-    // Set up a MutationObserver to check for sidebar changes
-    const observer = new MutationObserver((mutations) => {
-        for (let mutation of mutations) {
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                const sidebar = findSidebar();
-                if (sidebar) {
-                    const title = findSidebarTitle(sidebar);
-                    if (title) {
-                        createSettingsIcon(title);
-                        debouncedModifySidebar();
-                        return;
-                    }
-                }
-            }
-        }
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
 
     // Ensure the script runs even if the page is loaded from cache
     document.addEventListener('DOMContentLoaded', init);
@@ -268,7 +250,6 @@
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.action === "updateSidebar") {
             sidebarWidth = request.settings.sidebarWidth;
-            sidebarPinned = request.settings.sidebarPinned;
             sidebarDisabled = request.settings.sidebarDisabled;
             applySidebarSettings();
             sendResponse({success: true});
