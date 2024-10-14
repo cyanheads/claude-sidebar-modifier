@@ -1,5 +1,5 @@
 let currentSettings = {
-  sidebarWidth: 288,
+  sidebarWidth: 160,
   sidebarDisabled: false
 };
 

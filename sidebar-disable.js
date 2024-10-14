@@ -1,5 +1,5 @@
 (function() {
-    let sidebarWidth = 288;
+    let sidebarWidth = 160;
     let sidebarDisabled = false;
     let sidebar;
     let settingsPanel;
@@ -103,38 +103,74 @@
         if (!settingsPanel) {
             settingsPanel = document.createElement('div');
             settingsPanel.id = 'sidebarSettingsPanel';
-            settingsPanel.innerHTML = `
-                <h3>Sidebar Settings</h3>
-                <div class="setting-group">
-                    <label for="sidebarWidthSlider">Width:</label>
-                    <input type="range" id="sidebarWidthSlider" min="100" max="500" value="${sidebarWidth}">
-                    <span id="sidebarWidthValue">${sidebarWidth}px</span>
-                </div>
-                <div class="setting-group">
-                    <label for="sidebarDisabledToggle">
-                        <input type="checkbox" id="sidebarDisabledToggle" ${sidebarDisabled ? 'checked' : ''}>
-                        Disable Sidebar
-                    </label>
-                </div>
-                <button id="saveSettingsButton">Save</button>
-            `;
+    
+            const title = document.createElement('h3');
+            title.textContent = 'Sidebar Settings';
+            settingsPanel.appendChild(title);
+    
+            // Width setting
+            const widthGroup = document.createElement('div');
+            widthGroup.className = 'setting-group';
+    
+            const widthLabel = document.createElement('label');
+            widthLabel.htmlFor = 'sidebarWidthSlider';
+            widthLabel.textContent = 'Width:';
+            widthGroup.appendChild(widthLabel);
+    
+            const widthSlider = document.createElement('input');
+            widthSlider.type = 'range';
+            widthSlider.id = 'sidebarWidthSlider';
+            widthSlider.min = '100';
+            widthSlider.max = '500';
+            widthSlider.value = sidebarWidth.toString();
+            widthGroup.appendChild(widthSlider);
+    
+            const widthValue = document.createElement('span');
+            widthValue.id = 'sidebarWidthValue';
+            widthValue.textContent = `${sidebarWidth}px`;
+            widthGroup.appendChild(widthValue);
+    
+            settingsPanel.appendChild(widthGroup);
+    
+            // Disable setting
+            const disableGroup = document.createElement('div');
+            disableGroup.className = 'setting-group';
+    
+            const disableLabel = document.createElement('label');
+            disableLabel.htmlFor = 'sidebarDisabledToggle';
+    
+            const disableToggle = document.createElement('input');
+            disableToggle.type = 'checkbox';
+            disableToggle.id = 'sidebarDisabledToggle';
+            disableToggle.checked = sidebarDisabled;
+            disableLabel.appendChild(disableToggle);
+    
+            const disableLabelText = document.createTextNode('Disable Sidebar');
+            disableLabel.appendChild(disableLabelText);
+    
+            disableGroup.appendChild(disableLabel);
+            settingsPanel.appendChild(disableGroup);
+    
+            // Save button
+            const saveButton = document.createElement('button');
+            saveButton.id = 'saveSettingsButton';
+            saveButton.textContent = 'Save';
+            settingsPanel.appendChild(saveButton);
+    
             sidebar.appendChild(settingsPanel);
-
-            const widthSlider = document.getElementById('sidebarWidthSlider');
-            const widthValue = document.getElementById('sidebarWidthValue');
+    
+            // Event listeners
             widthSlider.addEventListener('input', () => {
                 sidebarWidth = parseInt(widthSlider.value);
                 widthValue.textContent = `${sidebarWidth}px`;
                 applySidebarSettings();
             });
-
-            const disabledToggle = document.getElementById('sidebarDisabledToggle');
-            disabledToggle.addEventListener('change', () => {
-                sidebarDisabled = disabledToggle.checked;
+    
+            disableToggle.addEventListener('change', () => {
+                sidebarDisabled = disableToggle.checked;
                 applySidebarSettings();
             });
-
-            const saveButton = document.getElementById('saveSettingsButton');
+    
             saveButton.addEventListener('click', () => {
                 saveSettings();
                 settingsPanel.style.display = 'none';
