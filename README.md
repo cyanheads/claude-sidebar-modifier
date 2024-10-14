@@ -8,8 +8,13 @@ This Firefox extension allows you to modify the sidebar behavior on Claude.ai. Y
 - 🚫 Completely disable the sidebar
 - 🔒 Can only access https://claude.ai/
 
-## 🛠️ Installation
+## 🖼️ Images
 
+| Extension Settings | Width Demo |
+|:------------------:|:----------:|
+| ![Extension Settings](assets/extension-settings.png) | ![Width Demo](assets/extension-width-demo.png) |
+
+## 🛠️ Installation
 ### From the Official Firefox Extension Gallery
 1. Visit the [Claude Sidebar Modifier extension page](https://addons.mozilla.org/en-US/firefox/addon/claude-sidebar-modifier/). (Awaiting Review)
 2. Click on "Add to Firefox" and follow the prompts to install the extension.
@@ -29,8 +34,11 @@ claude-sidebar-mod/
 ├── sidebar-disable.css
 ├── popup.html
 ├── popup.js
-├── icon-48.png
-└── icon-96.png
+└── assets/
+    ├── icon-48.png
+    ├── icon-96.png
+    ├── extension-settings.png
+    └── extension-width-demo.png
 ```
 
 ## 🔧 Usage
