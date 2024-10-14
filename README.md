@@ -60,9 +60,6 @@ If you encounter any issues:
 2. Try disabling and re-enabling the extension.
 3. If problems persist, please open an issue in this repository with a detailed description of the problem.
 
-## ⚠️ Known Issues
-- There is a known issue with the native 'pin sidebar' functionality not working when this extension is active. I'm investigating this and working on a fix.
-
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
