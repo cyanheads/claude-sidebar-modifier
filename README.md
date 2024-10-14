@@ -1,7 +1,7 @@
 # 🤖 Claude.ai Sidebar Modifier
 
 ## 🎯 Description
-This Firefox extension allows you to modify the sidebar behavior on Claude.ai, providing a customizable and more focused browsing experience. You can adjust the sidebar width or completely disable it from popping up. Useful for users who want to optimize their screen real estate or prefer a specific sidebar configuration.
+This Firefox extension allows you to modify the sidebar behavior on Claude.ai. You can adjust the sidebar width or completely disable it from popping in. Useful for users who want to optimize their screen real estate or prefer a specific sidebar width.
 
 ## ✨ Features
 - ➡️ Adjust sidebar width using a slider
@@ -44,8 +44,10 @@ To modify the extension:
 If you encounter any issues:
 1. Ensure you're using the latest version of Firefox.
 2. Try disabling and re-enabling the extension.
-3. Clear your browser cache and cookies for Claude.ai.
-4. If problems persist, please open an issue in this repository with a detailed description of the problem.
+3. If problems persist, please open an issue in this repository with a detailed description of the problem.
+
+## ⚠️ Known Issues
+- There is a known issue with the native 'pin sidebar' functionality not working when this extension is active. I'm investigating this and working on a fix.
 
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
