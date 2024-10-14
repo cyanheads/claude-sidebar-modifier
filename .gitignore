@@ -1,35 +1,403 @@
-# macOS system files
-.DS_Store
+# ============================
+# Logs
+# ============================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pip-log.txt
+pip-delete-this-directory.txt
+*.rbc
+capybara-*.html
+*.swp
+rerun.txt
+aider.log
 
-# Windows system files
+# ============================
+# Runtime Data
+# ============================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================
+# Coverage
+# ============================
+coverage/
+*.lcov
+.nyc_output/
+
+# ============================
+# Dependency Directories
+# ============================
+node_modules/
+jspm_packages/
+bower_components/
+.env/
+.env.test
+.env.production
+.env.local
+.env.*.local
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+.aider_cache/
+.aider_models/
+
+# ============================
+# Build / Output
+# ============================
+build/
+build/Release
+dist/
+out/
+.output/
+outputs/
+output/
+Outputs/
+*-[oO]utput/
+*-[oO]utputs/
+tree-sitter-languages/
+.release/
+build/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.jpi
+*.hpi
+*.apk
+*.ap_
+*.dex
+*.so
+*.db
+*.db-wal
+*.db-shm
+*/build/
+bin/
+.tmp/
+.aider_plugins/
+.aider.tmp.*
+.aider.local.conf.yml
+
+# ============================
+# Cache
+# ============================
+.cache/
+.cache
+.cache/
+.cache/
+.cache/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.grunt/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.vscode-test/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.history/
+.aider_cache/
+.pytest_cache
+.pytest_cache/
+.cache/
+cache/
+.aider_cache/
+
+# ============================
+# Compiled Binary Addons
+# ============================
+*.dll
+*.exe
+*.so
+*.dylib
+*.a
+*.lib
+*.out
+*.app
+*.i
+*.ii
+*.c~
+*.cpp~
+*.h~
+*.hpp~
+*.hxx~
+*.cxx~
+*.cc~
+*.hh~
+*.s~
+*.S~
+*.asm~
+*.dylib~
+*.dll~
+*.a~
+*.lib~
+*.so~
+
+# ============================
+# IDEs and Editors
+# ============================
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Other Editors
+.project
+*.code-workspace
+
+# ============================
+# Operating System Files
+# ============================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
 Thumbs.db
 ehthumbs.db
-[Dd]esktop.ini
+Desktop.ini
+$RECYCLE.BIN/
+Network Trash Folder
+Temporary Items
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.apdisk
 
-# Editor directories and files
-.vscode/
-.idea/
-*.swp
-*.swo
+# ============================
+# Programming Languages
+# ============================
 
-# Node.js dependencies
-node_modules/
+## Node.js
+lib-cov/
+.lock-wscript
+.lock-wscript
+*.tsbuildinfo
 
-# Python
-__pycache__/
+## Python
 *.py[cod]
 *.so
-
-# Logs and databases
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+__pycache__/
+*__pycache__*
+.Python
+*.manifest
+*.spec
+*.pyc
+*.pyo
+*.pyd
+*.cache
+*.coverage
+.hypothesis/
+.coverage
+.tox/
 *.log
-*.sql
-*.sqlite
 
-# OS generated files
+## Java
+.class
+.jar
+.war
+.ear
+.jpi
+.hpi
+.buildpath
+.classpath
+.project
+.settings/
+*.class
+
+## C/C++
+*.obj
+*.o
+*.lo
+*.la
+*.al
+*.libs
+*.so.[0-9]*
+*.dll~
+*.so~
+
+## Go
+*.exe
+*.test
+
+## LaTeX
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glo
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.out
+*.pdf
+*.synctex
+*.toc
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+
+## Ruby
+*.gem
+*.rbc
+.bundle
+.config
+.yardoc
+_yardoc
+.rspec
+tmp/
+allure-results/
+
+## JavaScript/TypeScript
+.cache/
+.nyc_output/
+dist/
+public/
+public/uploads
+public/system
+tmp/
+spec/tmp
+spec/examples.txt
+test/tmp
+test/version_tmp
+
+# ============================
+# Frameworks
+# ============================
+
+## Django
+*.log
+local_settings.py
+db.sqlite3
+media
+
+## Flask
+instance/
+.webassets-cache
+
+## Rails
+.cap*
+.bundle/
+db/*.sqlite3
+db/*.sqlite3-journal
+log/
+!log/.keep
+tmp/
+!tmp/.keep
+public/system
+public/uploads
+spec/tmp
+*.swp
+.project
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+coverage/
+spec/examples.txt
+test/tmp
+test/version_tmp
+/tmp/
+rerun.txt
+pickle-email-*.html
+
+## Next.js
+.next/
+out/
+
+## Nuxt.js
+.nuxt/
+dist/
+
+## Gatsby
+.cache/
+public/
+
+## WordPress
+wp-content/uploads/
+
+# ============================
+# Tools and Utilities
+# ============================
+.aider*
+.aider.chat.history.md
+.aider.conf.yml
+.aider.input.history
+.aider.local.conf.yml
+.aider.tmp.*
+.aider.log
+.aider_pluns/
+.cache/
+.aider_cache/
+.aider_models/
+repo-map-cache.json
+*_repo_map.md
+config.py
+
+# ============================
+# Version Control
+# ============================
+.gitignore
+.gitattributes
+.gitmodules
+.gitkeep
+.gitlab-ci.yml
+.gitlab/
+.git/
+
+# ============================
+# Miscellaneous
+# ============================
+archive/
+token.pkl
+CACHEDIR.TAG
+claude-sidebar-modifier.zip
