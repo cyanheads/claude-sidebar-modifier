@@ -9,6 +9,12 @@ This Firefox extension allows you to modify the sidebar behavior on Claude.ai. Y
 - 🔒 Can only access https://claude.ai/
 
 ## 🛠️ Installation
+
+### From the Official Firefox Extension Gallery
+1. Visit the [Claude Sidebar Modifier extension page](https://addons.mozilla.org/en-US/firefox/addon/claude-sidebar-modifier/).
+2. Click on "Add to Firefox" and follow the prompts to install the extension.
+
+### Manual Installation
 1. Clone this repository or download the ZIP file.
 2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`.
 3. Click on "Load Temporary Add-on".
