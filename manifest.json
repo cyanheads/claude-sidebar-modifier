@@ -1,8 +1,10 @@
 {
   "manifest_version": 2,
   "name": "Claude Sidebar Modifier",
-  "version": "1.4",
+  "version": "1.4.0",
   "description": "Modify the Claude.ai sidebar width and disable behavior",
+  "author": "Casey Hand",
+  "homepage_url": "https://github.com/cyanheads/claude-sidebar-modifier",
   "permissions": [
     "activeTab",
     "storage",
@@ -35,5 +37,6 @@
   "web_accessible_resources": [
     "sidebar-disable.js",
     "sidebar-disable.css"
-  ]
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
 }
