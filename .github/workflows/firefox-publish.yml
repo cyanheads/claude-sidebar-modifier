@@ -1,0 +1,36 @@
+name: Publish to Firefox Add-ons
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*' # Trigger on version tags
+
+jobs:
+  build:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install web-ext
+        run: npm install --global web-ext
+
+      - name: Build extension
+        run: web-ext build
+
+      - name: Sign extension
+        run: |
+          web-ext sign \
+            --api-key ${{ secrets.FIREFOX_API_KEY }} \
+            --api-secret ${{ secrets.FIREFOX_API_SECRET }}
+        env:
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
