@@ -63,10 +63,12 @@ main.mx-auto {
 
 /* Settings panel */
 #sidebarSettingsPanel {
-  position: absolute;
+  position: fixed;
   top: 60px;
-  right: 10px;
+  left: 300px;
+  z-index: 1000;
   background-color: var(--bg-color, #ffffff);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   color: var(--text-color, #000000);
   border: 1px solid var(--border-color, #e5e7eb);
   padding: 15px;
@@ -175,5 +177,5 @@ nav[data-testid="menu-sidebar"]:not(.pinned):not(.disabled):hover {
 }
 
 .sidebar-activation-zone.enabled {
-  transform: translateX(calc(var(--sidebar-width, 160px) - 100%));
+  transform: translateX(calc(var(--sidebar-width, 267px) - 100%));
 }

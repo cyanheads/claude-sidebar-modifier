@@ -1,5 +1,5 @@
 (function() {
-    let sidebarWidth = 160;
+    let sidebarWidth = 267;
     let sidebarDisabled = false;
     let sidebar = null;
     let settingsPanel = null;
@@ -69,14 +69,18 @@
 
     function toggleSettingsPanel(event) {
         event.stopPropagation();
-        if (settingsPanel) {
-            const isVisible = settingsPanel.style.display === 'block';
-            settingsPanel.style.display = isVisible ? 'none' : 'block';
+        if (!settingsPanel) {
+            createSettingsPanel();
         }
+        const isVisible = settingsPanel.style.display === 'block';
+        settingsPanel.style.display = isVisible ? 'none' : 'block';
     }
 
     function createSettingsPanel() {
-        if (settingsPanel) return;
+        if (document.getElementById('sidebarSettingsPanel')) {
+            settingsPanel = document.getElementById('sidebarSettingsPanel');
+            return;
+        }
 
         settingsPanel = document.createElement('div');
         settingsPanel.id = 'sidebarSettingsPanel';
@@ -94,20 +98,42 @@
         widthLabel.textContent = 'Width:';
         widthGroup.appendChild(widthLabel);
 
+        const sliderContainer = document.createElement('div');
+        sliderContainer.style.display = 'flex';
+        sliderContainer.style.gap = '8px';
+        sliderContainer.style.alignItems = 'center';
+
         const widthSlider = document.createElement('input');
         widthSlider.type = 'range';
         widthSlider.id = 'sidebarWidthSlider';
         widthSlider.min = '100';
         widthSlider.max = '500';
         widthSlider.value = sidebarWidth;
-        widthGroup.appendChild(widthSlider);
+        widthSlider.style.flex = '1';
+        sliderContainer.appendChild(widthSlider);
+
+        const resetButton = document.createElement('button');
+        resetButton.className = 'icon-button';
+        resetButton.textContent = 'RESET';
+        resetButton.title = 'Reset to default width';
+        sliderContainer.appendChild(resetButton);
 
         const widthValue = document.createElement('span');
         widthValue.id = 'sidebarWidthValue';
         widthValue.textContent = `${sidebarWidth}px`;
+        widthGroup.appendChild(sliderContainer);
         widthGroup.appendChild(widthValue);
 
         settingsPanel.appendChild(widthGroup);
+
+        // Reset button functionality
+        resetButton.addEventListener('click', () => {
+            sidebarWidth = 267;
+            widthSlider.value = sidebarWidth;
+            widthValue.textContent = `${sidebarWidth}px`;
+            applySidebarSettings();
+            saveSettings();
+        });
 
         // Disable setting
         const disableGroup = document.createElement('div');
@@ -130,7 +156,7 @@
         saveButton.textContent = 'Save';
         settingsPanel.appendChild(saveButton);
 
-        sidebar.appendChild(settingsPanel);
+        document.body.appendChild(settingsPanel);
 
         // Event listeners
         widthSlider.addEventListener('input', () => {
@@ -151,13 +177,17 @@
         });
 
         // Close panel when clicking outside
-        document.addEventListener('click', (event) => {
+        const handleOutsideClick = (event) => {
             if (settingsPanel.style.display === 'block' && 
                 !settingsPanel.contains(event.target) && 
                 !event.target.matches('#claudeSidebarSettingsIcon')) {
                 settingsPanel.style.display = 'none';
             }
-        });
+        };
+        
+        // Remove any existing click listener before adding a new one
+        document.removeEventListener('click', handleOutsideClick);
+        document.addEventListener('click', handleOutsideClick);
     }
 
     function applySidebarSettings() {

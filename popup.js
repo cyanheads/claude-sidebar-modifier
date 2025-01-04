@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const widthValue = document.getElementById('widthValue');
     const disabledCheckbox = document.getElementById('sidebarDisabled');
     const saveButton = document.getElementById('saveSettings');
+    const resetButton = document.getElementById('resetWidth');
     const successMessage = document.getElementById('successMessage');
+    const DEFAULT_WIDTH = 267;
     let saveTimeout;
 
     function showSuccessMessage() {
@@ -40,6 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
             widthValue.textContent = response.sidebarWidth;
             disabledCheckbox.checked = response.sidebarDisabled;
         }
+    });
+
+    // Reset width to default and save
+    resetButton.addEventListener('click', function() {
+        widthSlider.value = DEFAULT_WIDTH;
+        widthValue.textContent = DEFAULT_WIDTH;
+        
+        // Trigger save without closing panel
+        const settings = {
+            sidebarWidth: DEFAULT_WIDTH,
+            sidebarDisabled: disabledCheckbox.checked
+        };
+
+        saveButton.disabled = true;
+        saveButton.textContent = 'Saving...';
+
+        chrome.runtime.sendMessage({
+            action: "saveSettings",
+            settings: settings
+        }, function(response) {
+            saveButton.disabled = false;
+            saveButton.textContent = 'Save Settings';
+
+            if (chrome.runtime.lastError) {
+                handleError(chrome.runtime.lastError);
+                return;
+            }
+
+            if (response && response.success) {
+                showSuccessMessage();
+            } else {
+                handleError(new Error('Failed to save settings'));
+            }
+        });
     });
 
     // Update width value display with a smooth animation
