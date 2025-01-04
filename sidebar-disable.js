@@ -9,6 +9,7 @@
     const CSS_CLASSES = {
         SIDEBAR: 'nav[data-testid="menu-sidebar"]',
         SIDEBAR_INNER: '.fixed.bottom-0.left-0.top-0',
+        SIDEBAR_BG: '.from-bg-300\\/70.to-bg-400\\/70',
         ACTIVATION_ZONE: 'sidebar-activation-zone'
     };
 
@@ -153,7 +154,16 @@
         const innerSidebar = sidebar.querySelector(CSS_CLASSES.SIDEBAR_INNER);
         if (!innerSidebar) return;
 
-        const elements = [sidebar, innerSidebar, innerSidebar.firstElementChild];
+        // Find the background gradient div
+        const bgDiv = innerSidebar.querySelector(CSS_CLASSES.SIDEBAR_BG);
+
+        const elements = [
+            sidebar, 
+            innerSidebar, 
+            innerSidebar.firstElementChild,
+            bgDiv
+        ];
+
         elements.forEach(el => {
             if (el) {
                 el.style.width = `${sidebarWidth}px`;
