@@ -2,11 +2,8 @@ name: Publish to Firefox Add-ons
 
 on:
   push:
-    branches:
-      - main
-      - master
     tags:
-      - 'v*' # Trigger on version tags
+      - 'v*' # Only trigger on version tags
 
 jobs:
   build:
