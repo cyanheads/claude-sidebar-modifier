@@ -9,6 +9,19 @@ nav[data-testid="menu-sidebar"] > div {
   width: 100% !important;
 }
 
+/* Main content positioning */
+main.mx-auto {
+  margin-left: max(auto, var(--sidebar-width, 160px)) !important;
+  width: calc(100% - var(--sidebar-width, 160px)) !important;
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out !important;
+}
+
+/* When sidebar is disabled, reset main content position */
+body:has(nav[data-testid="menu-sidebar"][style*="transform: translateX(-100%)"]) main.mx-auto {
+  margin-left: auto !important;
+  width: 100% !important;
+}
+
 /* Settings icon */
 #claudeSidebarSettingsIcon {
   opacity: 0.7;
