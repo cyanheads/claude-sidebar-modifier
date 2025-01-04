@@ -19,6 +19,8 @@
             style.id = 'claude-sidebar-styles';
             document.head.appendChild(style);
         }
+        // Set CSS variable for sidebar width
+        document.documentElement.style.setProperty('--sidebar-width', `${sidebarWidth}px`);
     }
 
     const debounce = (func, wait) => {
@@ -150,6 +152,9 @@
     function applySidebarSettings() {
         if (!sidebar) return;
 
+        // Update CSS variable for sidebar width
+        document.documentElement.style.setProperty('--sidebar-width', `${sidebarWidth}px`);
+
         // Find the inner fixed div that needs width adjustment
         const innerSidebar = sidebar.querySelector(CSS_CLASSES.SIDEBAR_INNER);
         if (!innerSidebar) return;
@@ -200,6 +205,10 @@
                 clearTimeout(activationTimer);
             });
         }
+
+        // Update activation zone position
+        activationZone.classList.toggle('disabled', sidebarDisabled);
+        activationZone.classList.toggle('enabled', !sidebarDisabled);
     }
 
     function removeActivationZone() {

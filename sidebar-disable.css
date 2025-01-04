@@ -123,10 +123,19 @@ nav[data-testid="menu-sidebar"]:not(.pinned):not(.disabled):hover {
   height: 100%;
   z-index: 1001;
   background-color: transparent;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebar-activation-zone:hover {
   background-color: rgba(59, 130, 246, 0.1);
   width: 12px;
+}
+
+/* Activation zone positioning */
+.sidebar-activation-zone.disabled {
+  transform: translateX(0);
+}
+
+.sidebar-activation-zone.enabled {
+  transform: translateX(calc(var(--sidebar-width, 160px) - 100%));
 }
