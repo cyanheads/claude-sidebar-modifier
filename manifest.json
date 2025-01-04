@@ -2,6 +2,11 @@
   "manifest_version": 2,
   "name": "Claude Sidebar Modifier",
   "version": "1.5.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{dd8063c0-2f70-45d2-a49c-60be58d57c9a}"
+    }
+  },
   "license": "MIT",
   "description": "Modify the Claude.ai sidebar width and disable behavior",
   "author": "Casey Hand",

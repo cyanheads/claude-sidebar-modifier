@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build and publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
       
@@ -28,8 +28,7 @@ jobs:
           web-ext sign \
             --api-key ${{ secrets.FIREFOX_API_KEY }} \
             --api-secret ${{ secrets.FIREFOX_API_SECRET }} \
-            --channel listed \
-            --id "{dd8063c0-2f70-45d2-a49c-60be58d57c9a}"
+            --channel listed
         env:
           FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
           FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
