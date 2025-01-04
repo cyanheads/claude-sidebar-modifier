@@ -3,29 +3,42 @@ nav[data-testid="menu-sidebar"],
 nav[data-testid="menu-sidebar"] > div > div:first-child {
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
   overflow-x: hidden;
-  position: fixed !important;
+  position: fixed;
   z-index: 20;
+  height: 100%;
 }
 
 nav[data-testid="menu-sidebar"] > div {
   width: 100% !important;
 }
 
+/* Override Claude's layout system */
+.flex.min-h-screen.w-full {
+  position: relative !important;
+}
+
+.flex.min-h-screen.w-full > div:last-child {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+}
+
 /* Main content positioning */
 main.mx-auto {
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out !important;
+  transition: margin 0.3s ease-in-out !important;
   margin: 0 auto !important;
   width: 100% !important;
   max-width: 80rem !important; /* matches Claude's max-w-7xl */
-  position: relative !important;
 }
 
 /* Container centering */
 .min-h-full.w-full.min-w-0.flex-1 {
   display: flex;
   justify-content: center;
-  width: 100vw !important;
   padding: 0 1rem !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
 
 /* Settings icon */
