@@ -3,6 +3,8 @@ nav[data-testid="menu-sidebar"],
 nav[data-testid="menu-sidebar"] > div > div:first-child {
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
   overflow-x: hidden;
+  position: fixed !important;
+  z-index: 20;
 }
 
 nav[data-testid="menu-sidebar"] > div {
@@ -13,19 +15,17 @@ nav[data-testid="menu-sidebar"] > div {
 main.mx-auto {
   transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out !important;
   margin: 0 auto !important;
-  padding-left: calc(var(--sidebar-width, 160px) + 1rem) !important;
-  padding-right: 1rem !important;
+  width: 100% !important;
+  max-width: 80rem !important; /* matches Claude's max-w-7xl */
+  position: relative !important;
 }
 
-/* When sidebar is disabled, reset main content position */
-body:has(nav[data-testid="menu-sidebar"][style*="transform: translateX(-100%)"]) main.mx-auto {
-  padding-left: 1rem !important;
-}
-
-/* Ensure content stays centered in available space */
+/* Container centering */
 .min-h-full.w-full.min-w-0.flex-1 {
   display: flex;
   justify-content: center;
+  width: 100vw !important;
+  padding: 0 1rem !important;
 }
 
 /* Settings icon */
