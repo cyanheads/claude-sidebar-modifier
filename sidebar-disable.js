@@ -49,10 +49,9 @@
             settingsIcon = document.createElement('span');
             settingsIcon.id = 'claudeSidebarSettingsIcon';
             settingsIcon.innerHTML = '⚙️';
+            settingsIcon.addEventListener('click', toggleSettingsPanel);
             titleElement.appendChild(settingsIcon);
         }
-        settingsIcon.removeEventListener('click', toggleSettingsPanel);
-        settingsIcon.addEventListener('click', toggleSettingsPanel);
         return settingsIcon;
     }
 
@@ -68,9 +67,11 @@
         applySidebarSettings();
     }, 250);
 
-    function toggleSettingsPanel() {
+    function toggleSettingsPanel(event) {
+        event.stopPropagation();
         if (settingsPanel) {
-            settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
+            const isVisible = settingsPanel.style.display === 'block';
+            settingsPanel.style.display = isVisible ? 'none' : 'block';
         }
     }
 
@@ -143,9 +144,19 @@
             applySidebarSettings();
         });
 
-        saveButton.addEventListener('click', () => {
+        saveButton.addEventListener('click', (event) => {
+            event.stopPropagation();
             saveSettings();
             settingsPanel.style.display = 'none';
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', (event) => {
+            if (settingsPanel.style.display === 'block' && 
+                !settingsPanel.contains(event.target) && 
+                !event.target.matches('#claudeSidebarSettingsIcon')) {
+                settingsPanel.style.display = 'none';
+            }
         });
     }
 
@@ -257,7 +268,7 @@
                     const sidebar = findSidebar();
                     if (sidebar) {
                         const title = findSidebarTitle(sidebar);
-                        if (title) {
+                        if (title && !document.getElementById('claudeSidebarSettingsIcon')) {
                             createSettingsIcon(title);
                             break;
                         }
