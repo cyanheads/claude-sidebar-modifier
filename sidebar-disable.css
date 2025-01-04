@@ -11,15 +11,21 @@ nav[data-testid="menu-sidebar"] > div {
 
 /* Main content positioning */
 main.mx-auto {
-  margin-left: max(auto, var(--sidebar-width, 160px)) !important;
-  width: calc(100% - var(--sidebar-width, 160px)) !important;
-  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out !important;
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out !important;
+  margin: 0 auto !important;
+  padding-left: calc(var(--sidebar-width, 160px) + 1rem) !important;
+  padding-right: 1rem !important;
 }
 
 /* When sidebar is disabled, reset main content position */
 body:has(nav[data-testid="menu-sidebar"][style*="transform: translateX(-100%)"]) main.mx-auto {
-  margin-left: auto !important;
-  width: 100% !important;
+  padding-left: 1rem !important;
+}
+
+/* Ensure content stays centered in available space */
+.min-h-full.w-full.min-w-0.flex-1 {
+  display: flex;
+  justify-content: center;
 }
 
 /* Settings icon */
