@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Claude Sidebar Modifier",
-  "version": "1.4.0",
+  "version": "1.5.0",
+  "license": "MIT",
   "description": "Modify the Claude.ai sidebar width and disable behavior",
   "author": "Casey Hand",
   "homepage_url": "https://github.com/cyanheads/claude-sidebar-modifier",
