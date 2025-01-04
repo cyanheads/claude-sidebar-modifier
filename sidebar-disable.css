@@ -1,45 +1,58 @@
-/* sidebar-disable.css */
-.fixed.bottom-0.left-0.top-0.z-20 {
+/* Base sidebar styles */
+nav[data-testid="menu-sidebar"],
+nav[data-testid="menu-sidebar"] > div > div:first-child {
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
   overflow-x: hidden;
 }
 
-/* Ensure our modifications don't interfere with existing styles */
-.fixed.bottom-0.left-0.top-0.z-20 > div {
+nav[data-testid="menu-sidebar"] > div {
   width: 100% !important;
 }
 
-/* Styles for the settings icon */
+/* Settings icon */
 #claudeSidebarSettingsIcon {
   opacity: 0.7;
   transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 #claudeSidebarSettingsIcon:hover {
   opacity: 1;
 }
 
-/* Styles for the settings panel */
+/* Settings panel */
 #sidebarSettingsPanel {
   position: absolute;
   top: 60px;
   right: 10px;
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
+  background-color: var(--bg-color, #ffffff);
+  color: var(--text-color, #000000);
+  border: 1px solid var(--border-color, #e5e7eb);
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   display: none;
   z-index: 1000;
   width: 250px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  #sidebarSettingsPanel {
+    --bg-color: #1f2937;
+    --text-color: #f3f4f6;
+    --border-color: #374151;
+  }
 }
 
 #sidebarSettingsPanel h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 18px;
-  border-bottom: 1px solid #555;
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
   padding-bottom: 10px;
 }
 
@@ -49,66 +62,71 @@
 
 .setting-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 #sidebarWidthSlider {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  accent-color: var(--accent-color, #3b82f6);
 }
 
 #sidebarWidthValue {
   display: inline-block;
   width: 50px;
   text-align: right;
+  font-size: 14px;
+  color: var(--text-color, #000000);
 }
 
-/* Styles for the save button */
+/* Save button */
 #saveSettingsButton {
   display: block;
   width: 100%;
   padding: 8px 12px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--accent-color, #3b82f6);
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
   transition: background-color 0.2s ease-in-out;
 }
 
 #saveSettingsButton:hover {
-  background-color: #45a049;
+  background-color: var(--accent-hover-color, #2563eb);
 }
 
-/* Ensure the sidebar is visible when hovered or pinned */
-.fixed.bottom-0.left-0.top-0.z-20:hover,
-.fixed.bottom-0.left-0.top-0.z-20.pinned {
+/* Sidebar behavior */
+nav[data-testid="menu-sidebar"]:hover,
+nav[data-testid="menu-sidebar"].pinned {
   transform: translateX(0) !important;
 }
 
-/* Increase the visible edge when the sidebar is hidden */
-.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):not(.disabled) {
+nav[data-testid="menu-sidebar"]:not(.pinned):not(.disabled) {
+  transform: translateX(calc(-100% + 8px));
+}
+
+nav[data-testid="menu-sidebar"]:not(.pinned):not(.disabled):hover {
   transform: translateX(calc(-100% + 40px));
 }
 
-/* Add hover effect for easier access */
-.fixed.bottom-0.left-0.top-0.z-20:not(.pinned):not(.disabled):hover {
-  transform: translateX(calc(-100% + 80px));
-}
-
-/* Styles for the activation zone */
+/* Activation zone */
 .sidebar-activation-zone {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px;
+  width: 8px;
   height: 100%;
   z-index: 1001;
   background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .sidebar-activation-zone:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(59, 130, 246, 0.1);
+  width: 12px;
 }
